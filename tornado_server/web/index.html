@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DiViCo Device View</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="manifest" href="assets/manifest.json">
+    <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection">
+</head>
+
+<body>
+    <script type="module">
+        import {initialize} from "./js/main.js";
+        initialize();
+    </script>
+
+    <div id="touchDiv">
+        <svg class="touchPad">
+            <rect class="touchPadBackground"></rect>
+        </svg>
+    </div>
+
+    <script type="text/javascript" src="js/frameworks/d3.min.js"></script>
+    <script type="text/javascript" src="js/frameworks/hammer.min.js"></script>
+</body>
+</html>

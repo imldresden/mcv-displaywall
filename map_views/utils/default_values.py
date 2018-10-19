@@ -1,0 +1,24 @@
+from utils import colors
+
+
+class MapPointDetailViewDefaults(object):
+    SIZE_CM = (22, 18)
+    CHART_RATIO = 6
+    CHART_TEXT_RATIO = 7
+    CLOSE_BUTTON_RATIO = 17
+
+    MARKING_FONT_SIZE = 10
+    LABEL_FONT_SIZE = 12
+    TITLE_FONT_SIZE = 14
+    OFFSET_TO_OTHER = 3
+    BACKGROUND_COLOR = colors.WHITE
+    BACKGROUND_OPACITY = 0.90
+    BORDER_WIDTH = 3
+    CHART_P_LEFT = 142
+    CHART_P_TOP = 22
+    CHART_P_RIGHT = 50
+    CHART_P_BOTTOM = 20
+    TRIANGLE_RATIO = 25
+
+    CLOSE_BUTTON_STROKE_WIDTH = 3
+    CLOSE_BUTTON_COLOR = colors.GREY_DARKEN_1

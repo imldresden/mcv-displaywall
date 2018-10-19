@@ -1,0 +1,65 @@
+{
+  "Training": {
+    "1": [
+      "N1 Zeige die Details für die südlichsten Nachbarschaft auf der Karte an.",
+      "N2 Selektiere die Nachbarschaft mit den meisten Verbrechen im Oktober."
+    ],
+    "2": [
+      "N1 Selektiere in dem Streudiagramm rechts den Punkt für \"Diebstahl aus Auto\" und \"öffentl. Gebäude\".",
+      "N2 Selektiere alle Waffen im Graphen."
+    ],
+    "3": [
+      "N1 Erstelle eine Linse auf der Karte und lass nur die Nachbarschaften mit über 1000 Verbrechen anzeigen und lösche sie danach wieder.",
+      "N2 Erstelle eine Hilfslinie in dem Diagramm der Verbrechen je Stadtteil anzeigt und lass sie bloß drei Datenobjekte schneiden."
+    ],
+    "4": [
+      "N1 Selektiere in einem Diagramm die drei Stadtteile, die im Norden liegen.",
+      "N2 Zeige die Details einer der östlichen Nachbarschaft auf der Karte an."
+    ]
+  },
+  "Guided Exploration": {
+    "1": [
+      "1. Wie heißen die zwei Stadtteile mit den meisten Verbrechen?",
+      "2. Sind die beiden im Jahr 2016 immer noch die Top 2?",
+      "3. Gilt die Reihenfolge dieser Top 2 Stadtteile für jeden Wochentag?",
+      "4. In welchem Stadtteil gibt es an Donnerstagen die wenigsten Verbrechen?",
+      "5. In welchen Monaten weist dieser Stadtteil insgesamt nicht das geringste Verbrechensaufkommen auf?"
+    ],
+    "2": [
+      "1. Bei welchem Verbrechenstyp gab es im April 2015 eine deutliche Verbrechensspitze?",
+      "2. Welcher Verbrechenstyp weist insgesamt die meisten Verbrechen auf?",
+      "3. Zu welchen Tageszeiten unterscheidet sich die Verbrechensanzahl dieser beiden Typen eindeutig?"
+    ],
+    "3": [
+      "1. Wie viele Verbrechen gibt es jeweils in den 3 Nachbarschaften mit den meisten Verbrechen?",
+      "2. In welchen Stadtteilen liegen diese Nachbarschaften?",
+      "3. Zu welchen Tageszeiten unterscheidet sich die Anzahl Verbrechen in diesen 3 Nachbarschaften stark?",
+      "4. Bei welchen Verbrechenstypen sind diese Nachbarschaften eindeutig besonders betroffen?"
+    ],
+    "4": [
+      "1. Wie heißen die 4 Nachbarschaften mit insgesamt über 3000 Verbrechen, die nicht Diebstahl als höchsten Verbrechenstyp haben?",
+      "2. Was sind die höchsten Verbrechenstypen für diese Nachbarschaften?",
+      "3. Zu welchen Stadtteilen gehört die Nachbarschaft \"INNER HARBOR\"?",
+      "4. Wegen welcher Verbrechenstypen gibt es nachmittags für die Nachbarschaft \"INNER HARBOR\" einen ungewöhnlichen Verbrechensanstieg?"
+    ],
+    "5": [
+      "1. Wie viele Verbrechen werden jeweils mit den angegebenen Waffenarten durchgeführt?",
+      "2. Hat sich die Anzahl von Verbrechen mit Schusswaffen über die Jahre verändert?",
+      "3. Welche Verbrechenstypen werden mit Schusswaffen begangen?",
+      "4. Wie unterscheiden sich die Verbrechenstypen, die mit Schusswaffen durchgeführt werden hinsichtlich der Tageszeit?",
+      "5. Welche Nachbarschaften mit über 1000 Verbrechen haben Schusswaffen als meistgenutzte Waffenart?"
+    ],
+    "6": [
+      "1. In welchem Jahr gab es generell die wenigsten Verbrechen?",
+      "2. Wie viele Verbrechen gab es genau im Juni im Jahr 2014?",
+      "3. Gab es im Jahr 2014 an Donnerstagen mehr Verbrechen als an Montagen?",
+      "4. In welchem Jahr gab es Ende April einen deutlichen Verbrechensanstieg?"
+    ]
+  },
+  "Free Exploration": {
+    "1": ["Der Westen Baltimores ist gefährlicher als der Osten."],
+    "2": ["Auf Grund eines Schneesturms im Januar 2016 gab es zu dieser Zeit weniger Verbrechen."],
+    "3": ["Schießereien finden überwiegend nachts statt."],
+    "4": ["In Nachbarschaften mit weniger Verbrechen gibt es mehr Verbrechen mit Schusswaffen."]
+  }
+}

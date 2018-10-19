@@ -1,0 +1,50 @@
+[
+  {
+    "keys": ["V"],
+    "msg": "Activated or deactivated the Visualization view for the touches."
+  },
+  {
+    "keys": ["A"],
+    "msg": "Activated the interaction with the wall."
+  },
+  {
+    "keys": ["D"],
+    "msg": "Deactivated the interaction with the wall."
+  },
+  {
+    "keys": ["R"],
+    "msg": "The whole view was reset. "
+  },
+  {
+    "keys": ["T"],
+    "msg": "The touch test view was skipped. "
+  },
+  {
+    "keys": ["H"],
+    "msg": "A tip was granted."
+  },
+  {
+    "keys": ["Escape"],
+    "msg": "The program was closed."
+  },
+  {
+    "keys": ["shift", "1", "2", "3", "4"],
+    "msg": "Changed to phase: "
+  },
+  {
+    "keys": ["Down"],
+    "msg": "Change to next block: "
+  },
+  {
+    "keys": ["Up"],
+    "msg": "Change to previous block: "
+  },
+  {
+    "keys": [ "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+    "msg": "Checked/Unchecked the task: "
+  },
+  {
+    "keys": ["Return"],
+    "msg": "Started the block: "
+  }
+]

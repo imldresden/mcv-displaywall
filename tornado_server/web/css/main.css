@@ -1,0 +1,17 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    /* This is necessary to prevent all touch action for the browser itself. This allows the hammer.js recognizer to work. */
+    touch-action: none;
+    /*experimental: prevent text selection (especially for panning or dragging in visualizations)*/
+    /*-webkit-user-select: none;*/
+    /*-moz-user-select: none;*/
+    /*-ms-user-select: none;*/
+    /*user-select: none;*/
+}
+
+.touchPad .touchPadBackground{
+    fill: forestgreen;
+    width: inherit;
+    height: inherit;
+}

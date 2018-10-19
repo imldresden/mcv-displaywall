@@ -1,0 +1,249 @@
+map data from neighborhoods
+
+neighborhoods|name, neighborhoods|lat, neighborhoods|lng, crimes|count
+SELECT n.name, n.lat, n.lng, COUNT(c.crime_id) FROM neighborhoods n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN crimes c ON l.location_id = c.location_id GROUP BY n.name ORDER BY COUNT(c.crime_id)
+
+districts per neighborhood
+
+neighborhoods|name, districts|name
+SELECT n.name, d.label FROM (SELECT n.* FROM neighborhoods n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN crimes c ON l.location_id = c.location_id GROUP BY n.name ORDER BY COUNT(c.crime_id)) n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN districts d ON l.district_id = d.district_id GROUP BY n.name, d.name ORDER BY d.label ASC
+
+crime types per neighborhood
+
+neighborhoods|name, crime_types|name, crimes|count
+SELECT n.name, ct.label, COUNT(c.crime_id) FROM (SELECT n.* FROM neighborhoods n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN crimes c ON l.location_id = c.location_id GROUP BY n.name ORDER BY COUNT(c.crime_id)) n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN crimes c ON l.location_id = c.location_id INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id GROUP BY n.name, ct.name ORDER BY ct.label ASC
+
+crime type names
+
+crime_types|name
+SELECT ct.label FROM crime_types ct ORDER BY ct.label ASC
+
+highest weapon usage per neighborhood
+
+neighborhoods|name, weapons|name, crimes|count
+SELECT r.n_name, r.w_name, MAX(r.w_count) FROM (SELECT n.name as n_name, w.label as w_name, COUNT(c.crime_id) as w_count FROM neighborhoods n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN crimes c ON l.location_id = c.location_id INNER JOIN weapons w ON c.weapon_id = w.weapon_id WHERE w.name != 'UNKNOWN' GROUP BY n.name, w.name ORDER BY w_count ASC) r GROUP BY r.n_name
+
+0
+Crimes with Firearms / Types
+crime_types|name, crimes|count
+SELECT ct2.label, COUNT(r.crime_id) FROM crime_types ct2 LEFT JOIN (SELECT c.crime_id, c.crime_type_id as type_id FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id INNER JOIN weapons w ON c.weapon_id = w.weapon_id  WHERE w.name = 'FIREARM') r ON ct2.crime_type_id = r.type_id GROUP BY ct2.name ORDER BY ct2.label DESC
+
+1
+Crimes with Knifes / Types
+crime_types|name, crimes|count
+SELECT ct2.label, COUNT(r.crime_id) FROM crime_types ct2 LEFT JOIN (SELECT c.crime_id, c.crime_type_id as type_id FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id INNER JOIN weapons w ON c.weapon_id = w.weapon_id  WHERE w.name = 'KNIFE') r ON ct2.crime_type_id = r.type_id GROUP BY ct2.name ORDER BY ct2.label DESC
+
+2
+Crimes with Hands / Types
+crime_types|name, crimes|count
+SELECT ct2.label, COUNT(r.crime_id) FROM crime_types ct2 LEFT JOIN (SELECT c.crime_id, c.crime_type_id as type_id FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id INNER JOIN weapons w ON c.weapon_id = w.weapon_id  WHERE w.name = 'HANDS') r ON ct2.crime_type_id = r.type_id GROUP BY ct2.name ORDER BY ct2.label DESC
+
+3
+Crimes with Other Weapons / Types
+crime_types|name, crimes|count
+SELECT ct2.label, COUNT(r.crime_id) FROM crime_types ct2 LEFT JOIN (SELECT c.crime_id, c.crime_type_id as type_id FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id INNER JOIN weapons w ON c.weapon_id = w.weapon_id  WHERE w.name = 'OTHER') r ON ct2.crime_type_id = r.type_id GROUP BY ct2.name ORDER BY ct2.label DESC
+
+22
+Crimes grouped by Types / Days
+crimes|datetime|date, crime_types|name, crimes|count
+SELECT strftime('%Y-%m-%d', date(c.datetime), 'weekday 0', '-6 days') YearWeek, ct.label, COUNT(c.crime_code) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id GROUP BY c.year, c.week, ct.label ORDER BY YearWeek ASC
+
+13
+Crimes grouped by Weapons / Hours
+weapons|name, crimes|hour, crimes|count
+SELECT w.label, c.hour, COUNT(c.crime_code) FROM crimes c INNER JOIN weapons w ON c.weapon_id = w.weapon_id GROUP BY w.name, c.hour
+
+4
+Crimes on Sun. / Districts
+districts|name, crimes|count
+SELECT d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id  WHERE c.weekday = 0 GROUP BY d.short_name
+
+5
+Crimes on Mon. / Districts
+districts|name, crimes|count
+SELECT d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id  WHERE c.weekday = 1 GROUP BY d.short_name
+
+6
+Crimes on Tue. / Districts
+districts|name, crimes|count
+SELECT d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id  WHERE c.weekday = 2 GROUP BY d.short_name
+
+7
+Crimes on Wed. / Districts
+districts|name, crimes|count
+SELECT d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id  WHERE c.weekday = 3 GROUP BY d.short_name
+
+8
+Crimes on Thu. / Districts
+districts|name, crimes|count
+SELECT d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id  WHERE c.weekday = 4 GROUP BY d.short_name
+
+9
+Crimes on Fri. / Districts
+districts|name, crimes|count
+SELECT d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id  WHERE c.weekday = 5 GROUP BY d.short_name
+
+10
+Crimes on Sat. / Districts
+districts|name, crimes|count
+SELECT d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id  WHERE c.weekday = 6 GROUP BY d.short_name
+
+16
+Crimes / Premises (Top 15)
+premises|name, crimes|count
+SELECT p.label, COUNT(c.crime_id) as c_count FROM crimes c INNER JOIN premises p ON c.premise_id = p.premise_id GROUP BY p.name ORDER BY c_count DESC LIMIT 15
+
+33
+Crimes / Types
+crime_types|name, crimes|count
+SELECT ct.label, COUNT(c.crime_id) as c_count FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id GROUP BY ct.name ORDER BY ct.label DESC
+
+17
+Crimes grouped by Weapons / Weekdays
+weapons|name, crimes|weekday, crimes|count
+SELECT w.label, c.weekday, COUNT(c.crime_code) FROM crimes c INNER JOIN weapons w ON c.weapon_id = w.weapon_id GROUP BY c.weekday, w.name
+
+34
+Crimes grouped by Years / Months
+crimes|year, crimes|month, crimes|count
+SELECT c.year, c.month, COUNT(c.crime_id) FROM crimes c GROUP BY c.year, c.month
+
+35
+Crimes grouped by Years / Weekdays
+crimes|year, crimes|weekday, crimes|count
+SELECT c.year, c.weekday, COUNT(c.crime_id) FROM crimes c GROUP BY c.weekday, c.year
+
+36
+Crimes / Years
+crimes|year, crimes|count
+SELECT c.year, COUNT(c.crime_id) FROM crimes c GROUP BY c.year
+
+37
+Crimes / Districts
+districts|name, crimes|count
+SELECT d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id GROUP BY d.short_name
+
+38
+Crimes / Daytimes
+crimes|daytime|daytime, crimes|count
+SELECT c.daytime, COUNT(c.crime_id) FROM crimes c GROUP BY c.daytime ORDER BY c.daytime ASC
+
+39
+Crimes grouped by Types / Daytimes
+crime_types|name, crimes|daytime|daytime, crimes|count
+SELECT ct.label, c.daytime, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id GROUP BY ct.name, c.daytime ORDER BY c.daytime ASC
+
+40
+Crimes grouped by Weapons / Districts
+districts|name, weapons|name, crimes|count
+SELECT d.short_label, w.label, COUNT(c.crime_id) FROM crimes c INNER JOIN weapons w ON c.weapon_id = w.weapon_id INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id GROUP BY d.district_id, w.label
+
+32
+Crimes grouped by Neighborhoods / Types (Top 100)
+crime_types|name, neighborhoods|name, crimes|count
+SELECT ct.label, n.name, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN (SELECT n.* FROM neighborhoods n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN crimes c ON l.location_id = c.location_id GROUP BY n.name ORDER BY COUNT(c.crime_id) DESC LIMIT 100) n ON l.neighbor_id = n.neighbor_id GROUP BY ct.label, n.name
+
+41
+Crimes grouped by Neighborhoods / Daytimes (Top 100)
+crimes|daytime|daytime, neighborhoods|name, crimes|count
+SELECT c.daytime, n.name, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN (SELECT n.* FROM neighborhoods n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN crimes c ON l.location_id = c.location_id GROUP BY n.name ORDER BY COUNT(c.crime_id) DESC LIMIT 100) n ON l.neighbor_id = n.neighbor_id GROUP BY c.daytime, n.name ORDER BY c.daytime ASC
+
+24
+Crimes grouped by Districts / Month
+crimes|month, districts|name, crimes|count
+SELECT c.month, d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id GROUP BY c.month, d.short_name
+
+23
+Crimes grouped by Districts / Years
+crimes|year , districts|name, crimes|count
+SELECT c.year, d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id GROUP BY c.year, d.short_name
+
+12
+Types / Districts
+crime_types|name, districts|name, crimes|count
+SELECT ct.label, d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id GROUP BY ct.name, d.short_name ORDER BY ct.label DESC
+
+11
+Crimes grouped by Neighborhoods / Months (Top 100)
+crimes|month, neighborhoods|name, crimes|count
+SELECT c.month, n.name, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN (SELECT n.* FROM neighborhoods n INNER JOIN locations l ON n.neighbor_id = l.neighbor_id INNER JOIN crimes c ON l.location_id = c.location_id GROUP BY n.name ORDER BY COUNT(c.crime_id) DESC LIMIT 100) n ON l.neighbor_id = n.neighbor_id GROUP BY c.month, n.name
+
+25
+Crimes / Neighborhoods (Top 100)
+neighborhoods|name, crimes|count
+SELECT n.name, COUNT(c.crime_id) as c_count FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN neighborhoods n ON l.neighbor_id = n.neighbor_id GROUP BY n.name ORDER BY c_count DESC LIMIT 100
+
+26
+Crimes grouped by Weapons / Months
+crimes|month, weapons|name, crimes|count
+SELECT c.month, w.label, COUNT(c.crime_id) FROM crimes c INNER JOIN weapons w ON c.weapon_id = w.weapon_id GROUP BY c.month, w.name
+
+27
+Crimes grouped by Weapons / Years
+crimes|year, weapons|name, crimes|count
+SELECT c.year, w.label, COUNT(c.crime_id) FROM crimes c INNER JOIN weapons w ON c.weapon_id = w.weapon_id GROUP BY c.year, w.name
+
+43
+Types / Weekdays
+crime_types|name, crimes|weekday, crimes|count
+SELECT ct.label, c.weekday, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id GROUP BY ct.name, c.weekday ORDER BY ct.label ASC
+
+42
+Crimes grouped by Years / Days
+crimes|year, crimes|datetime|day, crimes|count
+SELECT c.year, strftime('%d-%m', c.datetime) as days, COUNT(c.crime_code) FROM crimes c GROUP BY c.year, c.month, c.day
+
+44
+Crimes grouped by Types in 2012 / Months
+crimes|month, crime_types|name, crimes|count
+SELECT c.month, ct.label, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id WHERE c.year = 2012 GROUP BY c.month, ct.name
+
+45
+Crimes grouped by Types in 2013 / Months
+crimes|month, crime_types|name, crimes|count
+SELECT c.month, ct.label, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id WHERE c.year = 2013 GROUP BY c.month, ct.name
+
+46
+Crimes grouped by Types in 2014 / Months
+crimes|month, crime_types|name, crimes|count
+SELECT c.month, ct.label, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id WHERE c.year = 2014 GROUP BY c.month, ct.name
+
+47
+Crimes grouped by Types in 2015 / Months
+crimes|month, crime_types|name, crimes|count
+SELECT c.month, ct.label, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id WHERE c.year = 2015 GROUP BY c.month, ct.name
+
+48
+Crimes grouped by Types in 2016 / Months
+crimes|month, crime_types|name, crimes|count
+SELECT c.month, ct.label, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id WHERE c.year = 2016 GROUP BY c.month, ct.name
+
+49
+Crimes grouped by Districts in 2012 / Months
+crimes|month, districts|name, crimes|count
+SELECT c.month, d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id WHERE c.year = 2012 GROUP BY c.month, d.name
+
+50
+Crimes grouped by Districts in 2013 / Months
+crimes|month, districts|name, crimes|count
+SELECT c.month, d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id WHERE c.year = 2013 GROUP BY c.month, d.name
+
+51
+Crimes grouped by Districts in 2014 / Months
+crimes|month, districts|name, crimes|count
+SELECT c.month, d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id WHERE c.year = 2014 GROUP BY c.month, d.name
+
+52
+Crimes grouped by Districts in 2015 / Months
+crimes|month, districts|name, crimes|count
+SELECT c.month, d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id WHERE c.year = 2015 GROUP BY c.month, d.name
+
+53
+Crimes grouped by Districts in 2016 / Months
+crimes|month, districts|name, crimes|count
+SELECT c.month, d.short_label, COUNT(c.crime_id) FROM crimes c INNER JOIN locations l ON c.location_id = l.location_id INNER JOIN districts d ON l.district_id = d.district_id WHERE c.year = 2016 GROUP BY c.month, d.name
+
+54
+Types / Premises (Top 15)
+crime_types|name, premises|name, crimes|count
+SELECT ct.label, p.label, COUNT(c.crime_id) FROM crimes c INNER JOIN crime_types ct ON c.crime_type_id = ct.crime_type_id INNER JOIN (SELECT p.*, COUNT(c.crime_id) as c_count FROM crimes c INNER JOIN premises p ON c.premise_id = p.premise_id GROUP BY p.name ORDER BY c_count DESC LIMIT 15) p ON c.premise_id = p.premise_id GROUP BY ct.name, p.name ORDER BY ct.label DESC

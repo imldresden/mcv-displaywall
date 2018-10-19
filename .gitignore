@@ -1,0 +1,10 @@
+*.pyc
+.idea
+tmp
+core.*
+/gen_db/*.sdb
+/gen_db/*.csv
+/gen_db/*.bak
+/gen_db/google_geocode_responses.pkl
+/gen_study_order/*.json
+

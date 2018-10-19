@@ -1,0 +1,20 @@
+{
+  "short_name": "DiViCo",
+  "name": "DiViCo Mobile Client",
+  "icons": [
+    {
+      "src": "/assets/icon-192.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icon-512.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display":      "fullscreen",
+  "orientation":  "landscape",
+  "background_color": "#33691e"
+}
