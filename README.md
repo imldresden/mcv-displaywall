@@ -31,7 +31,7 @@ We use this prototyp with Python 2.7. After installing Python you need to instal
   + pyOSC (>= 0.3.5b5294)
   + networkx (>= 2.1)
   + googlemaps (>= 2.5.1)
-  + PyGLM (>=0.4.8b1))
+  + PyGLM (>=0.4.8b1)
 
 Further it is necessary to install an additional library. This library is [libavg](https://www.libavg.de/site/) which 
 allows us to handle touch input and gesture recognition.
@@ -46,7 +46,7 @@ Further development information can be found via the
 [develpoment guide](DEVELOPMENT.md).
 
 If you want to contribute, please check the
-[contribution guide](CONTRIBUTING.md), fork our project, create a feature
+[contribution guide](CONTRIBUTION.md), fork our project, create a feature
 branch for your changes, and provide us with a pull request.
 
 ## Acknowledgements
