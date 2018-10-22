@@ -38,7 +38,7 @@ allows us to handle touch input and gesture recognition.
 
 ## Development
 
-This project is developed by [Marc Satkowski](https://github.com/satkowski) and
+This project is developed by [Marc Satkowski](https://github.com/satkowski), Ulrike Kister and
 [Ricardo Langner](https://github.com/derric) at the
 [Interactive Media Lab Dresden](https://imld.de/),
 Technische Universität Dresden, Germany.
