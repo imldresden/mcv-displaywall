@@ -1,3 +1,7 @@
+> **⚠ WARNING:**<br>
+> The code in this project is no longer maintained.
+> Use it with caution and check for vulnerabilities!
+
 # DiViCo
 
 The DiViCo (Distant Visualisation Control) prototype implements large-scale multiple coordinated views on a wall-sized interactive display. 
